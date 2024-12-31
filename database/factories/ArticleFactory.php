@@ -17,10 +17,8 @@ class ArticleFactory extends Factory
      */
     public function definition(): array
     {
-        $title = $this->faker->title;
-
         return [
-            'title' => $title,
+            'title' => $this->faker->sentence(),
             'content' => $this->faker->randomHtml(),
         ];
     }
