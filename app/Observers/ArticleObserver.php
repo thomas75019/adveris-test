@@ -3,23 +3,30 @@
 namespace App\Observers;
 
 use App\Models\Article;
-use Illuminate\Support\Str;
+use App\Services\SlugService;
 
 class ArticleObserver
 {
+    protected SlugService $slugService;
+
+    public function __construct(SlugService $slugService)
+    {
+        $this->slugService = $slugService;
+    }
+
     public function creating(Article $article): void
     {
-        $slug = Str::slug($article->title);
-        $count = Article::where('slug', 'LIKE', "{$slug}%")->count();
-        $article->slug = $count ? "{$slug}-{$count}" : $slug;
+        $slug = $this->slugService->createSlug($article->title);
+
+        $article->slug = $slug;
     }
 
     public function updating(Article $article): void
     {
         if ($article->isDirty('title')) {
-            $slug = Str::slug($article->title);
-            $count = Article::where('slug', 'LIKE', "{$slug}%")->where('id', '!=', $article->id)->count();
-            $article->slug = $count ? "{$slug}-{$count}" : $slug;
+            $slug = $this->slugService->createSlug($article->title);
+
+            $article->slug = $slug;
         }
     }
 }
