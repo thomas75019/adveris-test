@@ -31,9 +31,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="mt-4">
                     <h3 class="text-lg font-medium text-gray-900">{{ __('articles.list') }}</h3>
-                    @foreach ($articles as $article)
-                        @include('articles.card', ['article' => $article])
-                    @endforeach
+                    <div class="flex flex-wrap -mx-2">
+                        @foreach ($articles as $article)
+                            <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-2 mb-4">
+                                @include('articles.card', ['article' => $article])
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
