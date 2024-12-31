@@ -10,16 +10,12 @@
         </div>
     </div>
     <div class="mt-4">
-        @can('update', $article)
-            <a href="{{ route('articles.edit', $article->slug) }}" class="text-blue-500 hover:underline">Edit</a>
-        @endcan
+        <a href="{{ route('articles.edit', $article->slug) }}" class="text-blue-500 hover:underline">Edit</a>
 
-        @can('delete', $article)
-            <form action="{{ route('articles.destroy', $article->slug) }}" method="POST" class="inline-block">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-red-500 hover:underline ml-4">Delete</button>
-            </form>
-        @endcan
+        <form action="{{ route('articles.destroy', $article->slug) }}" method="POST" class="inline-block">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="text-red-500 hover:underline ml-4">Delete</button>
+        </form>
     </div>
 </x-app-layout>
