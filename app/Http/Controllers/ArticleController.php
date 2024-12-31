@@ -6,7 +6,6 @@ use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Gate;
 
 class ArticleController extends Controller
 {
@@ -19,7 +18,6 @@ class ArticleController extends Controller
 
         return view('dashboard', compact('articles'));
     }
-
 
     /**
      * Store a newly created resource in storage.
